@@ -8,7 +8,7 @@ const getNumber = () => {
           let firstNumber = `${x}${y}`;
           let secondNumber = `${z}${i}`;
           if (!num.includes(`${firstNumber} ${secondNumber}`)) {
-            if (!num.includes(`${firstNumber} ${secondNumber}`)) {
+            if (firstNumber < secondNumber) {
               num.push(`${firstNumber} ${secondNumber}`);
             }
           }
