@@ -53,7 +53,7 @@ const error = () => {
 /****************
  *   Formatting  *
  ****************/
-const displayArray = () => {
+const displayArray = (result) => {
   console.log(result);
 };
 
