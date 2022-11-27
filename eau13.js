@@ -1,35 +1,43 @@
 /**
- * Différence minimum absolue
+ * Tri par sélection
+ * 
+Créez un programme qui trie une liste de nombres. Votre programme devra implémenter l’algorithme du tri par sélection.
 
-Créez un programme qui affiche la différence minimum absolue entre deux éléments d’un tableau constitué uniquement de nombres. Nombres négatifs acceptés.
+Vous utiliserez une fonction de cette forme (selon votre langage) :
+my_select_sort(array) {
+	# votre algorithme
+	return (new_array)
+}
 
 Exemples d’utilisation :
-$> python exo.py 5 1 19 21
-2
+$> python exo.py 6 5 4 3 2 1
+1 2 3 4 5 6
 
-$> python exo.py 20 5 1 19 21
-1
-
-$> python exo.py -8 -6 4
-2
+$> python exo.py test test test
+error
 
 Afficher error et quitter le programme en cas de problèmes d’arguments.
+
+Wikipedia vous présentera une belle description de cet algorithme de tri.
  */
 
 /********************
  *     Functions     *
  ********************/
-const minValue = (arg) => {
-  const newArray = [];
-  for (let i = 0; i < arg.length - 1; i++) {
-    for (let x = 0; x < arg.length - 1; x++) {
-      if (x != i) {
-        newArray.push(Math.abs(arg[i] - arg[x]));
+const select = (array) => {
+  const n = array.length;
+  for (let i = 0; i < n - 2; i++) {
+    let min = i;
+    for (let j = i + 1; j < n - 1; j++) {
+      if (array[j] < array[min]) {
+        min = j;
       }
     }
+    if (min != i) {
+      [array[i], array[min]] = [array[min], array[i]];
+    }
   }
-
-  return Math.min(...newArray);
+  return array;
 };
 
 /**********************
@@ -39,25 +47,21 @@ const error = () => {
   console.log("error");
   process.exit();
 };
-
 /********************
  *      Parsing      *
  ********************/
 const parsing = () => {
   const arg = process.argv;
   arg.splice(0, 2);
-
-  if (arg.length < 2) {
+  if (arg.length < 1) {
     return error();
   }
-
-  arg.forEach((element) => {
+  arg.map((element) => {
     if (isNaN(element)) {
       return error();
     }
   });
-
-  return minValue(arg);
+  return select(arg);
 };
 
 /****************
